@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex Matcher and Email Validation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .section {
+            margin: 50px 0; /* Add margin to create gap */
+        }
+        .section.left-align {
+            text-align: left;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="submit"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            width: 300px;
+            font-size: 18px;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+        li {
+            padding: 5px 0;
+            font-size: 16px;
+            color: #333;
+        }
+        p {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="section left-align">
+        <h1>Regex Matcher</h1>
+        <form action="/results" method="post">
+            <label for="test_string">Test String:</label><br>
+            <input type="text" id="test_string" name="test_string"><br>
+            <label for="regex_pattern">Regex Pattern:</label><br>
+            <input type="text" id="regex_pattern" name="regex_pattern"><br><br>
+            <input type="submit" value="Submit">
+        </form>
+        {% if matched_strings %}
+        <h2>Matched Strings:</h2>
+        <ul>
+            {% for matched_string in matched_strings %}
+            <li>{{ matched_string }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+    <div class="section">
+        <h1>Email Validation</h1>
+        <form action="/validate-email" method="post">
+            <label for="email">Email Address:</label><br>
+            <input type="text" id="email" name="email" required><br><br>
+            <input type="submit" value="Validate">
+        </form>
+        {% if email %}
+        {% if is_valid is not none %}
+        {% if is_valid %}
+        <p>{{ email }} is a valid email address.</p>
+        {% else %}
+        <p>{{ email }} is not a valid email address.</p>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
